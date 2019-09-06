@@ -32,13 +32,13 @@ RSpec.describe ProjectsController, type: :controller do
         get :index
         expect(response).to have_http_status "302"
       end
-      
+
       it "redirects to the sign-in page" do
         get :index
         expect(response).to redirect_to "/users/sign_in"
       end
     end
-  
+
   end
 
   describe "#show" do
@@ -141,7 +141,7 @@ RSpec.describe ProjectsController, type: :controller do
       end
 
     end
-    
+
   end
 
   describe "#create" do
@@ -161,7 +161,7 @@ RSpec.describe ProjectsController, type: :controller do
           expect {
             post :create, params: { project: project_params }
           }.to change(@user.projects, :count).by(1)
-        end 
+        end
       end
 
       # 無効な属性値の場合
@@ -229,7 +229,7 @@ RSpec.describe ProjectsController, type: :controller do
 
     # 認可されていないユーザーとして
     context "as an unauthorized user" do
-    
+
       before do
         @user = FactoryBot.create(:user)
         other_user = FactoryBot.create(:user)
@@ -277,13 +277,13 @@ RSpec.describe ProjectsController, type: :controller do
             patch :update, params: { id: @project.id, project: project_params }
             expect(response).to redirect_to "/users/sign_in"
       end
-      
+
     end
 
   end
 
   describe "#destroy" do
-    
+
     context "as an authorized user" do
 
       before do
@@ -350,5 +350,5 @@ RSpec.describe ProjectsController, type: :controller do
     end
 
   end
-  
+
 end
