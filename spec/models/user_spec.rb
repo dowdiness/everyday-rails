@@ -17,7 +17,7 @@ RSpec.describe User, type: :model do
   # 姓がなければ無効な状態であること
   it "is invalid without a last name" do
     user = FactoryBot.build(:user, last_name: nil)
-  
+
     user.valid?
 
     expect(user.errors[:last_name]).to include("can't be blank")
