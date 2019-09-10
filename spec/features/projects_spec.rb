@@ -40,6 +40,26 @@ RSpec.feature "Projects", type: :feature do
     end
   end
 
+  # ユーザーはプロジェクトを完了済みにする
+  scenario "user completes a project" do
+    sign_in user
+    visit project_path(project)
+
+    expect(page).to_not have_content "Completed"
+
+    click_button "Complete"
+    expect(project.reload.completed?).to be true
+    expect(page).to have_content "Congratulations, this project is complete!"
+    expect(page).to have_content "Completed"
+    expect(page).to_not have_button "Complete"
+
+    #プロジェクトを持ったユーザーを準備する
+    #ユーザーはログインしている
+    #ユーザーがプロジェクト画面を開き、
+    #"complete" ボタンをクリックすると、
+    #プロジェクトは完了済みとしてマークされる
+  end
+
   def create_project(name, description)
     click_link "New Project"
     fill_in "Name", with: name

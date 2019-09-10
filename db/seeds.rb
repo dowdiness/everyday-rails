@@ -10,6 +10,13 @@ require "faker"
 
 # Create users with random IP addresses, for use in demonstrating tests
 # involving external HTTP services.
+User.create!(
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  email: "koji@gmail.com",
+  password: "password",
+  last_sign_in_ip: Faker::Internet.ip_v4_address,
+)
 20.times do
   User.create!(
     first_name: Faker::Name.first_name,
